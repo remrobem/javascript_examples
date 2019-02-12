@@ -1,6 +1,5 @@
 function removeSmallest(numbers) {
-    let lowest = numbers.reduce( (lowest,next) => { return lowest > next ? next : lowest },Infinity);
-    let output = numbers.slice(0);
-    output.splice(output.indexOf(lowest),1);
-    return output;
-  }
+    //   let lowestIndex = numbers.reduce( (lowest,next,index) => { return numbers[lowest] > numbers[index] ? index : lowest },0);
+    let lowestIndex = numbers.indexOf(Math.min(...numbers))
+    return numbers.filter((element, index) => index !== lowestIndex)
+}
