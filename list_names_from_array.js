@@ -11,5 +11,5 @@ function list(names) {
     }
 }
 
-let test = [ {name: 'Bart'}, {name: 'Lisa'}, {name: 'Marge'} ];
-console.log(list(test));
+let names = [ {name: 'Bart'}, {name: 'Lisa'}, {name: 'Marge'} ];
+console.log(list(names));
