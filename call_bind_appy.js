@@ -12,8 +12,8 @@ let printFullName = function (homeTown, state) {
     console.log(`${this.firstName} ${this.lastName} from ${homeTown}, ${state}`)
 }
 console.log('call');
-// don't use object nmae when move method out of object
-// name.printFullName.call(name);
+// don't use object name when move method out of object
+
 printFullName.call(name, 'Eden', 'NC');
 
 let name2 = {
