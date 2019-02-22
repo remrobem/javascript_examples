@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/row_sum_odd_numbers.js"
+            "program": "${workspaceFolder}/find_odd.js"
         }
     ]
 }
