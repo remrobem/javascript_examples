@@ -16,32 +16,23 @@
 //   });
 
 function findOdd(A) {
+    // sort the array
     A.sort();
-    // console.log(A);
-    let response = 0;
+    // initialize object used to get count for each value in array
     var count = {};
-
-
-    let lastNumber = A[0];
-    let lastCount = 0;
-
+    // create object with value:count pairs
     A.forEach(number => {
-
-        if (number != lastNumber) {
-            // console.log(`lastNumber: ${lastNumber}`)
-            // console.log(`lastCount: ${lastCount}`)
-            if (lastCount % 2 != 0) {return lastNumber};
-            lastNumber = number;
-        }
-
         count[number] = (count[number] || 0) + 1;
-        lastCount = count[number];
-       
     });
 
-
-
-
+    // loop over object returning first value that is odd
+    for (let key of Object.keys(count)) {
+        if (count[key] % 2 != 0) { return parseInt(key) };
+    }
+    return undefined;
 }
 
-console.log(findOdd([20, 1, -1, 2, -2, 3, 3, 5, 5, 1, 2, 4, 20, 4, -1, -2, 1]))
+const findOdd1 = (xs) => xs.reduce((a, b) => a ^ b);
+
+console.log(findOdd([20, 5, -1, 2, -2, 3, 3, 5, 1, 2, 4, 20, 4, -1, -2, 1]))
+console.log(findOdd1([20, 3,3,5, 5, 20, 5]))
