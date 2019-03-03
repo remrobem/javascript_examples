@@ -52,7 +52,24 @@ function cakes1(recipe, available) {
     }, Infinity)  
   }
 
+  function cakes2(recipe, available) {
+ 
+
+    console.log(`object keys: ${Object.keys(recipe)}`);
+    console.log(`object values: ${Object.values(recipe)}`);
+    console.log(`object entries: ${Object.entries(recipe)}`);
+    const keys = Object.keys(recipe)
+    console.log(`keys: ${keys}`)
+    console.log(typeof(keys))
+    console.log(`is Array: ${Array.isArray(keys)}`)
+ 
+
+  }
+
 console.log(cakes({ flour: 500, sugar: 200, eggs: 1 }, { flour: 1200, sugar: 1200, eggs: 5, milk: 200 }))
 console.log(cakes({ apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100 }, { sugar: 500, flour: 2000, milk: 2000 }));
 console.log(cakes1({ flour: 500, sugar: 200, eggs: 1 }, { flour: 1200, sugar: 1200, eggs: 5, milk: 200 }))
 console.log(cakes1({ apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100 }, { sugar: 500, flour: 2000, milk: 2000 }));
+console.log(cakes2({ apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100 }, { sugar: 500, flour: 2000, milk: 2000 }));
+
+
