@@ -14,5 +14,5 @@ function vowelCount1(argCount, ...args) {
     return ''; Ï
 }
 
-vowelCount(3, 'sjhddAjhOgj', 'zzzzZZzzzz', 'ajer iRoU', 'no response');
+vowelCount(3, 'sjhddAjhOgj', 'zzzzZZzzzz', 'ajer iRoU', 'response');
 vowelCount1(3, 'sjhddAjhOgj', 'zzzzZZzzzz', 'ajer iRoU', 'no response');
