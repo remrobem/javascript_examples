@@ -1,14 +1,29 @@
+// Type	                Result
+//-----------           ----------------------
+// Undefined	        "undefined"
+// Null	                "object" (see below)
+// Boolean	            "boolean"
+// Number	            "number"
+// String	            "string"
+
+// Symbol (new in ECMAScript 2015)	                        "symbol"
+// Host object (provided by the JS environment)	            Implementation-dependent
+// Function object (implements [[Call]] in ECMA-262 terms)	"function"
+
+// Any other object	     "object"
+
+
 // Although typeof bar === "object" is a reliable way of checking if bar is an object, the surprising gotcha in JavaScript is that null is also considered an object!
 
 // Therefore, the following code will, to the surprise of most developers, log true (not false) to the console:
-
+var fn = function () {};
+console.log(`typeOf fn: ${typeof fn}`)
 var bar = null;
 console.log(typeof bar === "object");  // logs true!
 // As long as one is aware of this, the problem can easily be avoided by also checking if bar is null:
 console.log((bar !== null) && (typeof bar === "object"));  // logs false
 
 // To be entirely thorough in our answer, there are two other things worth noting:
-
 // First, the above solution will return false if bar is a function. In most cases, this is the desired behavior, but in situations where you want to also return true for functions, you could amend the above solution to be:
 
 console.log((bar !== null) && ((typeof bar === "object") || (typeof bar === "function")));
@@ -23,7 +38,7 @@ console.log((bar !== null) && (bar.constructor === Object));
                 
 // Or, if you’re using jQuery:
 
-console.log((bar !== null) && (typeof bar === "object") && (! $.isArray(bar)));
+// console.log((bar !== null) && (typeof bar === "object") && (! $.isArray(bar)));
                 
 // ES5 makes the array case quite simple, including its own null check:
 
