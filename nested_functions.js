@@ -24,26 +24,47 @@
 // Test.assertEquals(eight(minus(three())), 5);
 // Test.assertEquals(six(dividedBy(two())), 3);
 
-function zero() {}
-function one() {}
-function two() {}
-function three() {}
-function four() {}
-function five() {
-console.log(5)
-}
-function six() {}
-function seven() {
-console.log(7)
-}
-function eight() {}
-function nine() {}
+function operation(number) {
 
-function plus() {}
-function minus() {}
-function times() {
-    console.log('*')
+    if (typeof num1 == 'number') {
+        switch (operand) {
+            case '+':
+                answer = (number + num1);
+                break;
+            case '-':
+                answer = (number - num1);
+                break;
+            case '*':
+                answer = (number * num1);
+                break;
+            case '/': answer = (Math.floor(number / num1));
+                break;
+        }
+        num1 = ' ';
+        return answer;
+    } else {
+        num1 = number
+    }
 }
-function dividedBy() {}
 
-console.log(seven(times(five())))
+function zero() { return operation(0); }
+function one() { return operation(1); }
+function two() { return operation(2); }
+function three() { return operation(3); }
+function four() { return operation(4); }
+function five() { return operation(5); }
+function six() { return operation(6); }
+function seven() { return operation(7); }
+function eight() { return operation(8); }
+function nine() { return operation(9); }
+
+function plus() { operand = '+'; }
+function minus() { operand = '-'; }
+function times() { operand = '*'; }
+function dividedBy() { operand = '/'; }
+
+console.log(two(times(four())))
+console.log(five(plus(one())))
+console.log(seven(minus(six())))
+console.log(nine(dividedBy(five())))
+console.log(eight(dividedBy(eight())))
