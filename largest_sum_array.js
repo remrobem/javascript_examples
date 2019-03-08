@@ -23,21 +23,27 @@
 
 function chooseBestSum(maxDistance, numberOfTrips, distances) {
 
-    let bestTripDistance = 9999999;
+// need to to loops numberOfTrips times - this code assuming 3
+    let bestTripDistance = 0;
+    let tripDistance = 0;
+    if (distances.length < numberOfTrips) {
+        return null
+    }
 
     for (let i = 0; i <= distances.length - numberOfTrips; i++) {
         for (let j = i + 1; j < distances.length; j++) {
             for (let k = j + 1; k < distances.length; k++) {
                 tripDistance = distances[i] + distances[j] + distances[k]
-                // console.log(`${distances[i]} ${distances[j]} ${distances[k]} ${tripDistance}`)
-            }
-            if (tripDistance < maxDistance && tripDistance <= bestTripDistance) {
-                bestTripDistance = tripDistance;
+                console.log(` ${distances[i]} ${distances[j]} ${distances[k]} ${tripDistance}`)
+
+                if (tripDistance <= maxDistance && tripDistance >= bestTripDistance) {
+                    bestTripDistance = tripDistance;
+                }
             }
         }
     }
     return bestTripDistance;
 };
 
-ys = [50, 55, 56, 57, 58];
+ys = [91, 74, 73, 85, 73, 81, 87];
 console.log(chooseBestSum(230, 3, ys));
