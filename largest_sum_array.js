@@ -48,14 +48,12 @@ function chooseBestSum(maxDistance, numberOfTrips, distances) {
    
         
         for (let j = i + 1; j < distances.length; j++) {
-            console.log(`${i} ${j}`);
+            // console.log(`${i} ${j}`);
 
             tripDistance = sumTripDistances(i, j);
             if (tripDistance <= maxDistance && tripDistance > bestTripDistance) {
                 bestTripDistance = tripDistance;
             }
-
-
         };
     };
 
@@ -63,10 +61,11 @@ function chooseBestSum(maxDistance, numberOfTrips, distances) {
         tripDistance = distances[baseIndex];
         for (let tripCounter = 0; tripCounter < numberOfTrips - 1; tripCounter++) {
             tripDistance += distances[startIndex + tripCounter];
+            console.log(tripDistance)
             // console.log(`${baseIndex} ${startIndex} ${tripCounter} ${startIndex + tripCounter}`)
             // console.log(`${distances[startIndex + tripCounter]}`)
         };
-        // console.log(`${tripDistance} ${distances[baseIndex]}`)
+        console.log(`${tripDistance} ${distances[baseIndex]}`)
         return tripDistance
     };
 
@@ -77,4 +76,4 @@ function chooseBestSum(maxDistance, numberOfTrips, distances) {
 // ys = [91, 74, 73, 85, 73, 81, 87];
 ys = [91, 74, 73, 85, 73, 81, 87];
 // console.log(chooseBestSum(230, 3, ys));
-console.log(chooseBestSum(331, 4, ys));
+console.log(chooseBestSum(331, 5, ys));
