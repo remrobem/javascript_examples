@@ -9,7 +9,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/largest_sum_array.js"
+            "program": "${workspaceFolder}/recursion.js"
         }
     ]
 }

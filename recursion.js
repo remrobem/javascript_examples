@@ -20,9 +20,10 @@ function factorial(x) {
 
   
   function chooseBestSum(maxDist, towns, arr) {
-    console.log(arr)
+    // console.log(arr)
+    // subArrays function executes from here one time
       let subsets = filterByLength(subArrays(arr), towns); 
-      let trip = []; 
+    //   let trip = []; 
       let myDist = 0; 
     //   console.log(subsets)
       for(var a of subsets){
@@ -36,12 +37,28 @@ function factorial(x) {
   }
 
   function subArrays(arr){
-    let kLengths = []; 
+    // let kLengths = []; 
     if (arr.length === 1) return [arr];
     else {
+      // recursive call. 6 times, dropping 1st entry each time.
+      // last array entry has 2 values
+      console.log(arr)
         subarr = subArrays(arr.slice(1));
-        console.log([[arr[0]]]) // this is an arrya of arrays for each dist except the last, descending seq
-        return subarr.concat(subarr.map(e => e.concat(arr[0])), [[arr[0]]]);
+        // post recursive happens 6 times
+        console.log('post recursive')
+        console.log(arr)
+        console.log(subarr)
+        // console.log('before return [[arr[0]]] :')
+        // console.log([[arr[0]]]) // this is an arrya of arrays for each dist except the last, descending seq
+        return subarr.concat(subarr.map(e => 
+            { 
+                // console.log('in return arr[0] :');
+                // console.log(e + ' ' + arr[0] + ' ' + [[arr[0]]]);
+                // console.log(e.concat(arr[0]));
+                // console.log([[arr[0]]]);
+                return e.concat(arr[0]);
+            }
+            ), [[arr[0]]]);
     }
   }
   
@@ -51,9 +68,12 @@ function factorial(x) {
 
   // arr is an array of array's
   function filterByLength(arr, n) {
-    //   console.log(`in filterByLength arr: `)
+      // console.log('start in filterByLength arr: ');
+      // console.log(arr);
     // console.log(arr)
     const result = arr.filter(a => a.length == n);
+    // console.log('end in filterByLength arr: ');
+    // console.log(result);
     return result;
   }
 
