@@ -25,6 +25,17 @@ function sum2(num) {
   console.log(`2 after return ${num}`)
 }
 
-console.log(sum(0));
-console.log(sum1(0));
-console.log(sum2(0));
+function sum3(num) {
+  if (num >= 3) { return `*3 final: ${num}` };
+  num += 1;
+  const sums = sum3(num);
+  console.log("sums: " + sums)
+  console.log(`3 before return ${num}`)
+  return sum3(num)
+  // not executed
+  console.log(`3 after return ${num}`)
+}
+// console.log(sum(0));
+// console.log(sum1(0));
+// console.log(sum2(0));
+console.log(sum3(0));
