@@ -22,3 +22,12 @@ console.log(`truthy: ${[...falseyTruthy].filter(Boolean)}`);
 // destructuring
 const [v1, v2, v3, v4] = ['a', 'b', 'c', 'd'];
 console.log(v1, v2, v3, v4);
+
+const testObj = { a: 12, b: 24 };
+const { a, b } = testObj;
+console.log(a, b);
+
+// loop to wrap around array
+for (i = 0; i < 20; i++) {
+    console.log(array[i % array.length]);
+};
