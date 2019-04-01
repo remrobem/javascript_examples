@@ -28,12 +28,19 @@ function sum2(num) {
 function sum3(num) {
   if (num >= 3) { return `*3 final: ${num}` };
   num += 1;
+  // this line executes sum3 until a return is hit
+ 
   const sums = sum3(num);
-  console.log("sums: " + sums)
-  console.log(`3 before return ${num}`)
-  return sum3(num)
+   // in this case, sums = `*3 final: 3`
+  // runs num times initially and has 3 sum3 executions in the call stack
+  // before this line executes
+  // num = 3
+  console.log("sums: " + sums);
+
+  console.log(`3 before return ${num}`);
+  return sum3(num);
   // not executed
-  console.log(`3 after return ${num}`)
+  console.log(`3 after return ${num}`);
 }
 // console.log(sum(0));
 // console.log(sum1(0));
