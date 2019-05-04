@@ -50,3 +50,13 @@ let qaz = new NewProduct('qaz', 12);
 console.log(widget.printProdSize());
 console.log(barWidget.printProdSize());
 console.log(qaz.displayProdSize());
+
+class RetailCustomer {
+    constructor(name, address, type = 'R') {
+        this.name = name;
+        this.address = address;
+        this.type = type;
+    }
+
+    printCustomer = () => {return (`Name: ${this.name} Address: ${this.address} Type: ${this.type}`)}
+}
