@@ -27,6 +27,7 @@ makeFunc();
 makeFunc();
 
 // myFunc is the returned function and the lexical scope of the function(closure)
+// iife is anonymous function that executes itself
 var myFunc = makeFunc();
 console.log('myFunc');
 myFunc();
