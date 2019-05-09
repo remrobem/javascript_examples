@@ -25,7 +25,7 @@ let FooWidget = class {
     }
 
     printProdSize() {
-       return `${this.name}: ${this.size}${this.size_uom}`;
+        return `${this.name}: ${this.size}${this.size_uom}`;
     }
 };
 
@@ -36,10 +36,10 @@ let NewProduct = class {
         this.size_uom = size_uom;
     }
 
-    displayProdSize() { return this.printProdSize()}
+    displayProdSize() { return this.printProdSize() }
 
     printProdSize() {
-       return `${this.name}: ${this.size}${this.size_uom}`;
+        return `${this.name}: ${this.size}${this.size_uom}`;
     }
 };
 
@@ -58,5 +58,35 @@ class RetailCustomer {
         this.type = type;
     }
 
-    printCustomer = () => {return (`Name: ${this.name} Address: ${this.address} Type: ${this.type}`)}
+    printCustomer() {
+        return (`Name: ${this.name} Address: ${this.address} Type: ${this.type}`)
+    }
 }
+
+
+//Create an empty constructor function
+function Person(){
+    this.test = 'aa';
+}
+//Add property name, age to the prototype property of the Person constructor function
+Person.prototype.name = "Ashwin" ;
+Person.prototype.age = 26;
+Person.prototype.friends = ['Jadeja', 'Vijay'],//Arrays are of reference type in JavaScript
+Person.prototype.sayName = function(){
+	console.log(this.name);
+}
+
+//Create objects using the Person constructor function
+var person1= new Person();
+var person2 = new Person();
+
+//Add a new element to the friends array
+person1.friends.push("Amit");
+
+person1.test = 'bb';
+
+// friends array is on prototye so any change affect all objects assigned from Person
+console.log(person1.friends);// Output: "Jadeja, Vijay, Amit"
+console.log(person2.friends);// Output: "Jadeja, Vijay, Amit"
+console.log(person1.test);
+console.log(person2.test);
