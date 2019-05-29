@@ -57,49 +57,52 @@
 
 
 function generateBC(url, separator) {
-    // initialize variables
-    let hrefText, hrefValue, spanText, response;
-    const href = `<a href="${hrefValue}">${hrefText}</a>`;
-    const span = `<span class="active">${spanText}</span>`;
 
+    const skipWords = ["the","of","in","from","by","with","and", "or", "for", "to", "at", "a"];
     // split the url on / only
     let urlComponents = url.split("/");
 
-    // split the last part of url into a ne table. split on typical special char used in url
+    // split the last part of url into a new table. split on typical special char used in url
     let lastURLComponent = urlComponents[urlComponents.length - 1].split(/[?,#,.]/);
     // if the last part of url is index, then get rid of it, it is not to be used
     if (lastURLComponent[0] == "index") {
         urlComponents.pop();
     };
-    // clear out the arrya used to split the last part of the url
+    // clear out the array used to split the last part of the url
     lastURLComponent = [];
+
     // remove the domain from the array, not needed for response
     urlComponents = urlComponents.slice(1);
 
-    console.log(urlComponents);
-    console.log(lastURLComponent);
-
     let responseArray = urlComponents.map((item, index, array) => {
+        if (index == array.length - 1) {
+            spanText = item.toUpperCase();
+            span = `<span class="active">${spanText}</span>`;
+            return span;
+        } else {
+            hrefValue = item;
+            hrefText = acronymize(item);
+            href = `<a href="${hrefValue}">${hrefText}</a>`;
+            return href;
 
-        if (index > 0) {
-            if (index == array.length - 1) {
-                spanText = item.toUpperCase();
-                console.log(`span: ${span}`)
-                return span;
-            }
         }
-
     })
 
-    console.log(responseArray)
+    return responseArray.join(separator);
 
-
-
-
-
-
+    function acronymize(text) {
+        if (text.length > 30) {
+            let words = text.split('-');
+            console.log(`words: ${words}`);
+            let response = words.filter( word => {
+                
+            })
+        }
+    }
 }
 
 console.log(generateBC("www.microsoft.com/important/confidential/docs/index.htm#top", " : "));
 
 console.log(generateBC("www.codewars.com/users/GiacomoSorbi", " : "));
+
+console.log(generateBC("mysite.com/very-long-url-to-make-a-silly-yet-meaningful-example/example.asp", " > "));
