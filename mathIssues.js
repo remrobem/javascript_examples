@@ -16,17 +16,17 @@
 // Test.assertEquals(Math.floor(0.5), 0, 'Math.floor(0.5)');
 
 Math.round = function(number) {
-   return ((number * 100000) % 100000) > 49999 ?  parseInt(number + 1) :  parseInt(number);
+   return (number - parseInt(number)) >= 0.5 ?  (parseInt(number) + 1) :  parseInt(number);
   };
   
   Math.ceil = function(number) {
-    return ( parseInt(number) == number ? number : parseInt(number) + 1); // TODO: fix this
+    return ( parseInt(number) == number ? number : parseInt(number) + 1); 
   };
   
   Math.floor = function(number) {
-    return parseInt(number); // TODO: fix this
+    return parseInt(number); 
   };
 
-  console.log(Math.round(0.5));
+  console.log(Math.round(0.49999));
   console.log(Math.ceil(7));
   console.log(Math.floor(8.0333));
