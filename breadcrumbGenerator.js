@@ -1,3 +1,4 @@
+"use strict";
 // As breadcrumb menùs are quite popular today, 
 // I won't digress much on explaining them, leaving the wiki link to do all the dirty work in my place.
 
@@ -29,7 +30,7 @@
 // if one element (other than the root/home) is longer than 30 characters, 
 // you have to shorten it, acronymizing it (i.e.: taking just the initials of every word); 
 // url will be always given in the format this-is-an-element-of-the-url 
-// and you should ignor e words in this array while acronymizing: 
+// and you should ignore words in this array while acronymizing: 
 // ["the","of","in","from","by","with","and", "or", "for", "to", "at", "a"]; 
 // a url composed of more words separated by - and equal or less than 30 characters long 
 // needs to be just uppercased with hyphens replaced by spaces.
@@ -58,51 +59,77 @@
 
 function generateBC(url, separator) {
 
-    const skipWords = ["the","of","in","from","by","with","and", "or", "for", "to", "at", "a"];
+    let hrefValue = '';
+    let hrefText, spanText, href, span, responseArray;
+
+    const skipWords = ["the", "of", "in", "from", "by", "with", "and", "or", "for", "to", "at", "a"];
     // split the url on / only
-    let urlComponents = url.split("/");
+
+    let urlComponents = url.replace('https://', '').replace('http://', '').split("/");
 
     // split the last part of url into a new table. split on typical special char used in url
     let lastURLComponent = urlComponents[urlComponents.length - 1].split(/[?,#,.]/);
     // if the last part of url is index, then get rid of it, it is not to be used
     if (lastURLComponent[0] == "index") {
         urlComponents.pop();
-    };
+        spanText = urlComponents[urlComponents.length - 1].toUpperCase();
+    } else {
+        spanText = lastURLComponent[0].toUpperCase();
+    }
     // clear out the array used to split the last part of the url
     lastURLComponent = [];
 
     // remove the domain from the array, not needed for response
     urlComponents = urlComponents.slice(1);
 
-    let responseArray = urlComponents.map((item, index, array) => {
+
+    responseArray = urlComponents.map((item, index, array) => {
+        // last entry needs to be span
         if (index == array.length - 1) {
-            spanText = item.toUpperCase();
+            spanText = acronymize(spanText);
             span = `<span class="active">${spanText}</span>`;
             return span;
         } else {
-            hrefValue = item;
+            hrefValue = hrefValue.concat('/', item);
             hrefText = acronymize(item);
-            href = `<a href="${hrefValue}">${hrefText}</a>`;
+            href = `<a href="${hrefValue}/">${hrefText}</a>`;
             return href;
-
         }
     })
+
+    // add the HOME entry
+    responseArray.unshift('<a href="/">HOME</a>');
+
+    // if the url has no components, need to add empty span
+    if (!urlComponents) {
+        responseArray.push(`<span class="active">HOME</span>`);
+    }
 
     return responseArray.join(separator);
 
     function acronymize(text) {
         if (text.length > 30) {
+            // split word into array
             let words = text.split('-');
-            console.log(`words: ${words}`);
-            let response = words.filter( word => {
-                
+            // remove words to be skipped in acronym
+            let response = words.filter(word => {
+                return skipWords.includes(word.toLowerCase()) ? false : true
             })
+            // get first letter of each word into an arrary
+            response = response.map(word => {
+                return word.charAt(0).toUpperCase()
+            })
+            // convert letters in array to  string
+            return response.join('')
         }
+
+        return text.replace(/-/gi, ' ').toUpperCase();
     }
-}
+};
 
-console.log(generateBC("www.microsoft.com/important/confidential/docs/index.htm#top", " : "));
-
-console.log(generateBC("www.codewars.com/users/GiacomoSorbi", " : "));
-
-console.log(generateBC("mysite.com/very-long-url-to-make-a-silly-yet-meaningful-example/example.asp", " > "));
+console.log(generateBC("github.com","-"));
+// console.log(generateBC("www.microsoft.com/important/confidential/docs/index.htm#top", " : "));
+// console.log(generateBC("www.codewars.com/users/Giacomo-Sorbi", " : "));
+// console.log(generateBC("mysite.com/very-long-url-to-make-a-silly-yet-meaningful-example/example.asp", " > "));
+// console.log(generateBC("https://pippi.pi/kamehameha-research-pippi-uber-transmutation/diplomatic-kamehameha/giacomo-sorbi.asp#team?order=desc&filter=adult", " > "));
+// console.log(generateBC("pippi.pi/wanted/images/issues/insider-bed-uber-transmutation/login.php#bottom?previous=normalSearch&output=full", ' . '));
