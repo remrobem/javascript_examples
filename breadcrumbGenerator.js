@@ -63,25 +63,32 @@ function generateBC(url, separator) {
     let hrefText, spanText, href, span, responseArray;
 
     const skipWords = ["the", "of", "in", "from", "by", "with", "and", "or", "for", "to", "at", "a"];
-    // split the url on / only
-
+    
+    // get rid of http/s:// and split the url on /
     let urlComponents = url.replace('https://', '').replace('http://', '').split("/");
-
-    // split the last part of url into a new table. split on typical special char used in url
-    let lastURLComponent = urlComponents[urlComponents.length - 1].split(/[?,#,.]/);
-    // if the last part of url is index, then get rid of it, it is not to be used
-    if (lastURLComponent[0] == "index") {
-        urlComponents.pop();
-        spanText = urlComponents[urlComponents.length - 1].toUpperCase();
-    } else {
-        spanText = lastURLComponent[0].toUpperCase();
-    }
-    // clear out the array used to split the last part of the url
-    lastURLComponent = [];
 
     // remove the domain from the array, not needed for response
     urlComponents = urlComponents.slice(1);
 
+    // if no components, return only the span
+    if (urlComponents.length == 0 || urlComponents[0].length == 0) {
+        return '<span class="active">HOME</span>';
+    }
+
+    // split the last part of url into a new table. split on typical special char used in url
+    let lastURLComponent = urlComponents[urlComponents.length - 1].split(/[?,#,.]/);
+
+    // if the last part of url is index, then get rid of it, use the last component in the span
+    if (lastURLComponent[0] == "index") {
+        urlComponents.pop();
+        if (urlComponents.length == 0) {
+            return '<span class="active">HOME</span>';
+        } else {
+            spanText = urlComponents[urlComponents.length - 1].toUpperCase();
+        }
+    } else {
+        spanText = lastURLComponent[0].toUpperCase();
+    }
 
     responseArray = urlComponents.map((item, index, array) => {
         // last entry needs to be span
@@ -99,11 +106,6 @@ function generateBC(url, separator) {
 
     // add the HOME entry
     responseArray.unshift('<a href="/">HOME</a>');
-
-    // if the url has no components, need to add empty span
-    if (!urlComponents) {
-        responseArray.push(`<span class="active">HOME</span>`);
-    }
 
     return responseArray.join(separator);
 
@@ -127,7 +129,7 @@ function generateBC(url, separator) {
     }
 };
 
-console.log(generateBC("github.com","-"));
+console.log(generateBC("github.com/index.htm", "-"));
 // console.log(generateBC("www.microsoft.com/important/confidential/docs/index.htm#top", " : "));
 // console.log(generateBC("www.codewars.com/users/Giacomo-Sorbi", " : "));
 // console.log(generateBC("mysite.com/very-long-url-to-make-a-silly-yet-meaningful-example/example.asp", " > "));
