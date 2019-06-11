@@ -38,3 +38,4 @@ console.log(f1(1, 2, 3, 4)); // 6 (the fourth parameter is not destructured)
 test1(3, 4, 5); // test1 executes 3 times showing each value 
 test1([3, 4, 5]); // array pased as single value, shows 1 value: returned = array
 test2([3, 4, 5]); // test2 executes 3 times showing each value 
+//
