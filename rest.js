@@ -15,13 +15,13 @@ function f00(...[a, b, c]) {
   console.log(arguments);// shows as Arguments array and object
   console.log(JSON.stringify(arguments)); // shows as object
   console.log(`f00 table arguments:`);  
-  console.table(arguments);
+  console.table(arguments); // nothing displayed
   return;
 };
 
 function f1(...[a, b, c]) {
-  console.log('f1 table agrguments')
-  console.table(arguments);
+  console.log('f1 table agruments')
+  console.table(arguments); // nothing displayed
   return a + b + c;
 };
 
@@ -35,7 +35,11 @@ f00(4, 'a', 5, 'e');
 console.log(f1(1));          // NaN (b and c are undefined)
 console.log(f1(1, 2, 3));    // 6
 console.log(f1(1, 2, 3, 4)); // 6 (the fourth parameter is not destructured)
-test1(3, 4, 5); // test1 executes 3 times showing each value 
-test1([3, 4, 5]); // array pased as single value, shows 1 value: returned = array
-test2([3, 4, 5]); // test2 executes 3 times showing each value 
-//
+test1(3, 4, 5); // test1 executes 3 times returning each value 
+test1([3, 4, 5]); // array passed as single value, returns 1 value: returned = array
+test2([3, 4, 5]); // test2 executes 3 times returning each value 
+// this is actually a spread on the call to fn test1
+test1(...[3, 4, 5],6,7); // same as:  test1(3, 4, 5); // test1 executes 3 times returning each value 
+//test2(...[3, 4, 5]); // not valid 
+
+
