@@ -9,7 +9,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/closure.js"
+            "program": "${workspaceFolder}/objects.js"
         }
     ]
 }
