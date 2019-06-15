@@ -21,52 +21,29 @@ function Paint(type = 'unknown', use = 'unknown', color = 'N/A', finish = 'N/A',
 
     // define getter for constructor
     // these execute implicitly when price is referenced or updated
-    // Object.defineProperty(this, "price", {
-    //     get() {
-    //         return typeof price == 'number' ? `$${price}` : price;
-    //     },
-    //     set(newPrice) { 
-    //         // store price change details
-    //         let priceChange = ((newPrice * 100) - (price * 100)) / 100;
-    //         if (priceChange != 0) {
-    //             this.priceChanges.push(
-    //                 {
-    //                     'originalPrice' : price,
-    //                     'newPrice' : newPrice,
-    //                     'change' : priceChange
-    //                 }
-    //             )
-    //         }
-    //         console.log(`Price Change: ${priceChange}`) 
-    //     }
-    // });
+    Object.defineProperty(this, "price", {
+        get() {
+            return typeof price == 'number' ? `$${price}` : price;
+        },
+        set(newPrice) {
+            // store price change details
+            let priceChange = ((newPrice * 100) - (price * 100)) / 100;
+            if (priceChange != 0) {
+                this.priceChanges.push(
+                    {
+                        'originalPrice': price,
+                        'newPrice': newPrice,
+                        'change': priceChange
+                    }
+                )
+            }
+            console.log(`Price Change: ${priceChange}`)
+        }
+    });
 };
 // put methods in prototype only so not all instances have a copy
 Paint.prototype.getColor = function () { return this.attributes.color };
 Paint.prototype.getFinish = function () { return this.attributes.finish };
-
- // define getter for constructor
-// these execute implicitly when price is referenced or updated
-Object.defineProperty(Paint.prototype, "this.price", {
-    get() {
-        return typeof this.price == 'number' ? `$${this.price}` : this.price;
-    },
-    set(newPrice) { 
-        // store price change details
-        let priceChange = ((newPrice * 100) - (this.price * 100)) / 100;
-        if (priceChange != 0) {
-            this.priceChanges.push(
-                {
-                    'originalPrice' : this.price,
-                    'newPrice' : newPrice,
-                    'change' : priceChange
-                }
-            )
-        }
-        console.log(`Price Change: ${priceChange}`) 
-    }
-});
-
 
 let kitchenPaint = new Paint('latex', 'indoor', 'white', 'eggshell', 27.50);
 kitchenPaint.price = 12.14;
@@ -102,3 +79,48 @@ console.log('bathroom paint:')
 console.log(bathroomPaint);
 console.log(bathroomPaint.getColor);
 console.log(bathroomPaint.getFinish);
+
+// this pattern avoids use of this
+// each method returns a function (closure)
+// the closure keeps values in _firstName and _lastName
+// sand those variables are private
+// mark: 
+// { fullName: [Function],
+//   firstName: [Function],
+//   lastName: [Function] }
+
+function Person(firstName, lastName) {
+    var _firstName = firstName,
+        _lastName = lastName;
+
+    var my = {};
+
+    my.fullName = function () {
+        return _firstName + ' ' + _lastName;
+    };
+
+    // Getter/setters
+    my.firstName = function (value) {
+        if (!arguments.length) return _firstName;
+        _firstName = value;
+
+        return my;
+    };
+
+    my.lastName = function (value) {
+        if (!arguments.length) return _lastName;
+        _lastName = value;
+
+        return my;
+    };
+
+    return my;
+}
+
+// Use it like this:
+var mark = Person('Mark', 'Twain'); // note: no `new` keyword!
+console.log(`mark: ${JSON.stringify(mark)}`);
+console.log(mark);
+mark.firstName('Samuel');
+mark.lastName('Clemens');
+console.log(mark.fullName()); // Samuel Clemens
