@@ -1,0 +1,22 @@
+{
+  "name": "javascript_examples",
+  "version": "1.0.0",
+  "description": "",
+  "main": "array_diff.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/remrobem/javascript_examples.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/remrobem/javascript_examples/issues"
+  },
+  "homepage": "https://github.com/remrobem/javascript_examples#readme",
+  "devDependencies": {
+    "jest": "^24.8.0"
+  }
+}

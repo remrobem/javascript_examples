@@ -124,3 +124,5 @@ console.log(mark);
 mark.firstName('Samuel');
 mark.lastName('Clemens');
 console.log(mark.fullName()); // Samuel Clemens
+
+module.exports = Paint;
